@@ -13,8 +13,24 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID guid;
-    private String vehicleType, marque, model, engine, status, dateInsert, datePurchase;
+    private String vehicleType, marque, modell, engine, status, dateInsert, datePurchase;
     private int enginePowerBhp, topSpeedMph, costUsd, price;
+
+    public Post(){
+    }
+
+    public Post(String vehicleType, String marque, String modell, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase, int costUsd, int price) {
+        this.vehicleType=vehicleType;
+        this.marque=marque;
+        this.modell=modell;
+        this.engine=engine;
+        this.enginePowerBhp=enginePowerBhp;
+        this.topSpeedMph=topSpeedMph;
+        this.datePurchase=datePurchase;
+        this.costUsd=costUsd;
+        this.price=price;
+    }
+
 
 
 
@@ -22,8 +38,8 @@ public class Post {
         return guid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.guid = uuid;
+    public void setUuid(UUID guid) {
+        this.guid = guid;
     }
 
     public String getVehicleType() {
@@ -42,12 +58,12 @@ public class Post {
         this.marque = marque;
     }
 
-    public String getModel() {
-        return model;
+    public String getModell() {
+        return modell;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setModell(String modell) {
+        this.modell = modell;
     }
 
     public String getEngine() {
@@ -113,9 +129,5 @@ public class Post {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
-
-
 
 }
