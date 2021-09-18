@@ -9,64 +9,70 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+
 
 @RestController
 public class MainController {
 
     //переменная которая ссылается на наш репозиторий
     @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
-
-
-  /*  @PostMapping( "/vehicle")
-    public String vehiclePost(@RequestParam String vehicleType,@RequestParam String marque,@RequestParam String modell, @RequestParam String engine, @RequestParam int enginePowerBhp, @RequestParam int topSpeedMph,@RequestParam String datePurchase,@RequestParam int costUsd,@RequestParam int price, Model model) {
-        Post post = new Post( vehicleType,marque,modell,engine,enginePowerBhp,topSpeedMph,datePurchase,costUsd,price);
-        postRepository.save(post);
-        return "vehicle";
+    MainController(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
-*/
+
 
     //добавить купленное тс в бд сервиса
     @PostMapping("/vehicle")
     Post newPost(@RequestBody Post newPost) {
         return postRepository.save(newPost);
     }
-/*
-    @PutMapping("/vehicle/{uuid}")
-    Post replaceEmployee(@RequestBody Post newPost, @PathVariable UUID uuid) {
 
-        return PostRepository.findById(uuid)
+    @PutMapping("/vehicle")
+    Post newPost(@RequestBody Post newPost, @PathVariable UUID uuid) {
+
+        return postRepository.findById(uuid)
                 .map(post -> {
                     post.setVehicleType(newPost.getVehicleType());
                     post.setMarque(newPost.getMarque());
-                    return PostRepository.save(post);
+                    post.setModell(newPost.getModell());
+                    post.setEngine(newPost.getEngine());
+                    post.setEnginePowerBhp(newPost.getEnginePowerBhp());
+                    post.setTopSpeedMph(newPost.getTopSpeedMph());
+                    post.setDatePurchase(newPost.getDatePurchase());
+                    post.setCostUsd(newPost.getCostUsd());
+                    post.setPrice(newPost.getPrice());
+                    return postRepository.save(post);
                 })
                 .orElseGet(() -> {
                     newPost.setUuid(uuid);
-                    return PostRepository.save(newPost);
+                    return postRepository.save(newPost);
                 });
     }
 
-    @GetMapping("/employees/{guid}")
-    Post one(@PathVariable UUID uuid) {
-
-        return PostRepository.findById(uuid)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
-    }
-*/
-
-    @GetMapping("/vehicle/")
-    public String vehicle( Model model) {
-
-        return "vehicle";
-    }
-
     @GetMapping("/vehicle/search")
-    public String search( Model model) {
-
-        return "search";
+    List<Post> all() {
+        return postRepository.findAll();
     }
+
+// работает
+    @GetMapping("/vehicle/{uuid}")
+    Post one(@PathVariable UUID uuid) {
+        return postRepository.findById(uuid).get();
+    }
+
+
 
     @GetMapping("/vehicle/types")
     public String types( Model model) {
@@ -74,8 +80,5 @@ public class MainController {
         return "types";
     }
 
-    //поиск по гуид
-    // Iterable<Post> posts = postRepository.findAllById();
-    //  model.addAttribute("posts", posts);
 
 }

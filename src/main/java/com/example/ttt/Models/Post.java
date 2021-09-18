@@ -12,7 +12,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID guid;
+    private UUID uuid;
     private String vehicleType, marque, modell, engine, status, dateInsert, datePurchase;
     private int enginePowerBhp, topSpeedMph, costUsd, price;
 
@@ -20,6 +20,7 @@ public class Post {
     }
 
     public Post(String vehicleType, String marque, String modell, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase, int costUsd, int price) {
+
         this.vehicleType=vehicleType;
         this.marque=marque;
         this.modell=modell;
@@ -35,11 +36,11 @@ public class Post {
 
 
     public UUID getUuid() {
-        return guid;
+        return uuid;
     }
 
-    public void setUuid(UUID guid) {
-        this.guid = guid;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getVehicleType() {
