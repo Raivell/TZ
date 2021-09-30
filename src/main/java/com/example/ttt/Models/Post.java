@@ -7,23 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.UUID;
 
+/**
+ * @Entity Аннотация определяет, что класс может быть сопоставлен с таблицей.
+ *
+ * class Post - класс являющийся моделью, отвечающий за определенную таблицу в БД.
+ */
+
 @Entity
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
-    private String vehicleType, marque, modell, engine, status, dateInsert, datePurchase;
+    private String vehicleType, marque, model, engine, status, dateInsert, datePurchase;
     private int enginePowerBhp, topSpeedMph, costUsd, price;
 
     public Post(){
     }
 
-    public Post(String vehicleType, String marque, String modell, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase, int costUsd, int price, String status) {
+    public Post(String vehicleType, String marque, String model, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase, int costUsd, int price, String status) {
 
         this.vehicleType=vehicleType;
         this.marque=marque;
-        this.modell=modell;
+        this.model=model;
         this.engine=engine;
         this.enginePowerBhp=enginePowerBhp;
         this.topSpeedMph=topSpeedMph;
@@ -60,12 +66,12 @@ public class Post {
         this.marque = marque;
     }
 
-    public String getModell() {
-        return modell;
+    public String getModel() {
+        return model;
     }
 
-    public void setModell(String modell) {
-        this.modell = modell;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public String getEngine() {
