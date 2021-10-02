@@ -25,7 +25,7 @@ public class Post {
     public Post(){
     }
 
-    public Post(String vehicleType, String marque, String model, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase, int costUsd, int price, String status) {
+    public Post(String vehicleType, String marque, String model, String engine, int enginePowerBhp, int topSpeedMph,String datePurchase,String dateInsert, int costUsd, int price, String status) {
 
         this.vehicleType=vehicleType;
         this.marque=marque;
@@ -34,11 +34,11 @@ public class Post {
         this.enginePowerBhp=enginePowerBhp;
         this.topSpeedMph=topSpeedMph;
         this.datePurchase=datePurchase;
+        this.dateInsert=dateInsert;
         this.costUsd=costUsd;
         this.price=price;
         this.status=status;
     }
-
 
 
 
