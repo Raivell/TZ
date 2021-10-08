@@ -3,6 +3,7 @@ package com.example.ttt.Controllers;
 import com.example.ttt.Models.Post;
 import com.example.ttt.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,10 @@ public class MainController {
 
     public MainController(PostRepository postRepository) {
         this.postRepository = postRepository;
+
     }
+
+
 
     /**
      * timeStamp передает в DateInsert время обновления записи.
@@ -58,6 +62,22 @@ public class MainController {
         return ResponseEntity.ok().body(result);
     }
 
+
+    //Назначение функции api: Поиск ТС по заданным критериям в БД сервиса
+    //необязательность параметров не реализована
+    @GetMapping("/vehicle/search")
+    public List<Post> getTechMembersNativeQuery(@RequestParam(name="vehicleType")String vehicleType,
+                                                @RequestParam(name="marque", required = false) String marque,
+                                                @RequestParam(name="model", required = false) String model,
+                                                @RequestParam(name="engine", required = false) String engine,
+                                                @RequestParam(name="status", required = false) String status ){
+
+        System.out.println("Enter search");
+        return postRepository.findTechMembersNativeQuery(vehicleType, marque, model, engine, status);
+
+    }
+
+
     // Назначение функции api: Получение ТС из БД сервиса по guid ТС, присвоенному ему при создании записи
     @GetMapping("/vehicle/{uuid}")
     public Optional<Post> one(@PathVariable UUID uuid) {
@@ -67,32 +87,18 @@ public class MainController {
     }
 
 
+
+
 /*
-    @GetMapping("/vehicle/search")
-    public Iterable<Post> two(@RequestParam String vehicleType,
-                              @RequestParam String marque,
-                              @RequestParam String model,
-                              @RequestParam (required = false) String engine,
-                              @RequestParam (required = false) String status) {
-        System.out.println("Enter doGet");
+    @GetMapping("/vehicle/types")
+    public List<Post> two() {
 
-
-
-        return postRepository.findAll();
+        return postRepository.findWithCount();
 
     }
 
-    @GetMapping("/vehicle/search")
-    public Map<String, String[]> two(WebRequest webRequest){
-        Map<String, String[]> params = webRequest.getParameterMap();
-        if (postRepository == params)
-            postRepository.findAll((Pageable) params);
-        return params;
-
-    }*/
-
-
-
-
-
+new StringBuilder(word).reverse().toString()
+*/
 }
+
+

@@ -41,7 +41,6 @@ public class Post {
     }
 
 
-
     public UUID getUuid() {
         return uuid;
     }
